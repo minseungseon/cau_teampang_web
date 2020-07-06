@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가입하기</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+</head>
+<body>
+
+    <div class="video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/jmNyvDa_iWs?amp;autoplay=1&controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="container">
+        <form action="{%url 'signup'%}" class="signup-form" method ="POST">
+            {%csrf_token%}
+
+            <h1>회원가입</h1>
+            <!-- <h2>Sign Up!</h2> -->
+            <div class="signup-txtb">  
+                ID <input type="text" name="username" placeholder="아이디를 입력하세요" autocomplete="off">
+            </div>
+    
+            <div class="signup-txtb">
+                Password <input type="password"name ="password1" placeholder="비밀번호를 입력하세요" autocomplete="off">
+            </div>  
+            <div class="signup-txtb">
+                Confirm PW :<input name ="password2" placeholder="비밀번호를 한번 더 입력하세요"  type="password" />
+            </div>
+            <br />
+            <input type="submit" value="팀푸앙 시작하기!" class ="signupbtn"/>
+        </form>
+        </div>
+</body>
+</html>

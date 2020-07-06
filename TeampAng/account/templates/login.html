@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+</head>
+
+
+<body>
+    <div class="insert">
+        <img src="{%static 'img/img1.png'%}">
+    </div>
+
+    <form action="{%url 'login'%}" class="login-form" method ="POST">
+        {%csrf_token%}
+        <!-- <h1>팀푸앙에 오신 것을 환영합니다</h1> -->
+
+        <img src=" {% static 'img/logo1.png' %}">
+        <div class="txtb">  
+            <input type="text" name="username" autocomplete="off">
+            <span data-placeholder="아이디"></span>
+        </div>
+
+        <div class="txtb">
+            <input type="password"name ="password" autocomplete="off">
+            <span data-placeholder="비밀번호"></span>
+        </div>
+
+        <input type="submit" class="logbtn" value="LOGIN" >
+    </f>
+    <div class="bottom-text">
+        <!-- Don't have account? <a href="signup/">Sign up</a> -->
+        팀푸앙이 처음이신가요? <a href="signup">가입하기</a>
+    </div>
+
+    <script type="text/javascript">
+        $(".txtb input").on("focus",function(){
+            $(this).addClass("focus");
+        });
+
+        $(".txtb input").on("blur",function(){
+        if($(this).val()=="")
+            $(this).removeClass("focus");
+        });
+    </script> 
+
+</body>
+</html>

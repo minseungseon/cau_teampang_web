@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <title>TimeTable</title>
+    <style>
+        *{
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+        body{
+            background:white;
+        }
+        .container{
+            height: auto;
+            width: 800px;
+            margin: auto;
+            font-family: sans-serif;
+        }
+        .head{
+            text-align: center;
+            background:  #299DF3;
+            font-size: 2.5em;
+            letter-spacing: 1px;
+            color: white;
+            padding: 25px;
+            border: 1px solid #DBDBDB; 
+            /* border이 저 테두리 */
+        }
+        table,th,td{
+            width: 100%;
+            table-layout: fixed;
+            text-align: center;
+            font-size: 17px;
+            border-collapse: collapse;
+            border: 1px solid #DBDBDB;
+        }
+        tr,th,td{
+            padding:15px;
+        }
+        th{
+            background: white;
+            color: #DBDBDB;
+        }
+        td{
+            background: white;
+        }
+        td:hover
+    </style>
+</head>
+
+
+<body>
+
+
+    
+    <div class="container">
+        <div class="head">
+            <strong>나의 시간표 등록하기</strong>
+            <br>
+        </div>
+            <table>
+                <tr>
+                    <th> </th>
+                    <th>mon</th>
+                    <th>tue</th>
+                    <th>wed</th>
+                    <th>thur</th>
+                    <th>fri</th>
+                </tr>
+                <tr>
+                    <td> 9</td>
+                    {% for day in timetable %}
+                    <td>{{day.0}}</td>
+                    {% endfor %}
+                </tr>
+               
+                <tr>
+                    <td> 10</td>
+                    {% for day in timetable %}
+                    <td>{{day.1}}</td>
+                    {% endfor %}
+                </tr>
+
+                <tr>
+                    <td> 11</td>
+                    {% for day in timetable %}
+                    <td>{{day.2}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td> 12</td>
+                    {% for day in timetable %}
+                    <td>{{day.3}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td> 1</td>
+                    {% for day in timetable %}
+                    <td>{{day.4}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td> 2</td>
+                    {% for day in timetable %}
+                    <td>{{day.5}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td> 3</td>
+                    {% for day in timetable %}
+                    <td>{{day.6}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td> 4</td>
+                    {% for day in timetable %}
+                    <td>{{day.7}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td> 5</td>
+                    {% for day in timetable %}
+                    <td>{{day.8}}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td> 6</td>
+                    {% for day in timetable %}
+                    <td>{{day.9}}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+    </div>
+</body>
+</html>
