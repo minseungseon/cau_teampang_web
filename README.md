@@ -29,7 +29,8 @@ Teampang is an assisstant web/app service for managing team projects. It is espe
 |Lim Geon|LimGeon|lgun202@naver.com|
 |Jaeyong Kim|JaeYooong|rladltjq123@hanmail.net|
 |Sangje Jeong|sanggae4133|sanggae4133@naver.com|
-| | | |
+|Seungah Kim|seungahkim|safg0421@gmail.com|
+|Sumin Kim|||
   
 ## License  
 Chungang University, TeamPang 2020
