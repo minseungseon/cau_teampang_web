@@ -10,14 +10,28 @@ class MeetingCreate(models.Model):
     # author = models.ForeignKey(User, on_delete=models.CASCADE) #작성자 => 팀장
 
 class MeetingInput(models.Model): #MeetingDetail로 이름 바꾸기
-    team = models.ForeignKey(MeetingCreate, on_delete=models.CASCADE)
+    team = models.ForeignKey(MeetingCreate, on_delete=models.CASCADE,related_name='team_input')
     dummyname = models.CharField(max_length=30)
     timetable = JSONField(null=True)
 
+    class Meta:
+        unique_together = ['team', 'dummyname', 'timetable']
+        ordering = ['team']
+    
+    def __str__(self):
+        return '%d: %s , %s' % (self.team, self.dummyname, self.timetable)
+
 class MeetingTime(models.Model):
-    team = models.ForeignKey(MeetingCreate, on_delete=models.CASCADE)
+    team = models.ForeignKey(MeetingCreate, on_delete=models.CASCADE,related_name='team_time')
     matched_date = models.DateField()
     matched_time = models.TimeField()
+
+    class Meta:
+        unique_together = ['team', 'matched_date', 'matched_time']
+        ordering = ['team']
+    
+    def __str__(self):
+        return '%d: %s , %s' % (self.team, self.matched_time, self.matched_time)
     
 # class MemberList(models.Model):
 # 	# authenticated = models. #유저 정보
