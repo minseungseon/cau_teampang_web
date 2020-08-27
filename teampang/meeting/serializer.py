@@ -1,14 +1,19 @@
-from .models import MeetingResult, MeetingInput
+from .models import MeetingCreate, MeetingInput, MeetingTime
 from rest_framework import serializers
 
-class MeetingResultSerializer(serializers.ModelSerializer):
+class MeetingCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MeetingResult
+        model = MeetingCreate
             # fields = '__all__'
-        fields = ['name', 'matched_date', 'matched_time', 'due_date', 'invite_url']
+        fields = ['name', 'due_date', 'invite_url']
 
     
 class MeetingInputSerializer(serializers.ModelSerializer):
     class Meta:
         model = MeetingInput
+        fields = '__all__'
+
+class MeetingTimeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MeetingTime
         fields = '__all__'
