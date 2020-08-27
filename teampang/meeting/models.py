@@ -10,10 +10,12 @@ class MeetingCreate(models.Model):
     # author = models.ForeignKey(User, on_delete=models.CASCADE) #작성자 => 팀장
 
 class MeetingInput(models.Model): #MeetingDetail로 이름 바꾸기
+    team = models.ForeignKey(MeetingCreate, on_delete=models.CASCADE)
     dummyname = models.CharField(max_length=30)
     timetable = JSONField(null=True)
 
 class MeetingTime(models.Model):
+    team = models.ForeignKey(MeetingCreate, on_delete=models.CASCADE)
     matched_date = models.DateField()
     matched_time = models.TimeField()
     
