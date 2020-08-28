@@ -8,7 +8,7 @@ Teampang is an assisstant web/app service for managing team projects. It is espe
 | **Date** | **Contributor** | **Updated Contents** |
 |:----:|:-----------:|:----------------:|
 |2020-07-06|Minseung Seon|Updated README.md|
-|2020-07-06|Minseung Seon, Lim Geon|had first meeting, modified UX/UI outline|
+|2020-07-06|Minseung Seon, Lim Geon, Seungah Kim|had first meeting, modified UX/UI outline|
 | | | | 
 
 ## Tech/Framework used  
