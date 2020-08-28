@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from accounts import urls
+from accounts import urls #accounts앱과 연결
 from rest_framework import urls
 
 
@@ -25,6 +25,7 @@ from rest_framework import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
+    path('api-auth/', include('rest_framework.urls')),#오른쪽 위에 로그인/로그아웃 버튼 만들기
 ]
 
 # app : 기능별?! 우리 분업별? 
