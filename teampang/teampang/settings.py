@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'accounts',
     'knox',#로그인/로그아웃 위해 추가로 설치해야 함 : pip install django-rest-knox
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -134,3 +137,4 @@ REST_FRAMEWORK = {#로그인/로그아웃 기능 위해서 추가
         'knox.auth.TokenAuthentication',
     ]
 }
+

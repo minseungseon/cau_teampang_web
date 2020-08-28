@@ -1,4 +1,4 @@
-from .models import Essay, Profile, Photo
+from .models import Essay, Profile, Photo, Account
 from rest_framework import serializers
 from django.contrib.auth.models import User
 
@@ -35,16 +35,20 @@ class ProfileSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email', 'password')
 
 # Register Serializer
-class RegisterSerializer(serializers.ModelSerializer):
+class RegisterSerializer(serializers.ModelSerializer): #여기 수정하면 회원가입 해결
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'username', 'email', 'password') #여기 수정하면 회원가입 해결
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
 
         return user
+
+
+
+

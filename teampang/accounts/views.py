@@ -8,6 +8,9 @@ from knox.models import AuthToken#유저기능
 from django.contrib.auth import login#로그인/아웃 기능
 from rest_framework.authtoken.serializers import AuthTokenSerializer#로그인/아웃기능
 from knox.views import LoginView as KnoxLoginView#로그인/아웃
+from rest_framework.decorators import api_view
+
+
 
 class EssayViewSet(viewsets.ModelViewSet):
 
@@ -93,3 +96,7 @@ class LoginAPI(KnoxLoginView):
         user = serializer.validated_data['user']
         login(request, user)
         return super(LoginAPI, self).post(request, format=None)
+
+
+
+

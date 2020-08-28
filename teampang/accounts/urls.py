@@ -12,7 +12,7 @@ router.register('profile', views.ProfileViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('api/register/', RegisterAPI.as_view(), name='register'),#유저
+    path('api/register/', RegisterAPI.as_view(), name='register'),#회원가입
     path('api/login/', LoginAPI.as_view(), name='login'),#로그인
     path('api/logout/', knox_views.LogoutView.as_view(), name='logout'),#로그아웃
     path('api/logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),#모두로그아웃
