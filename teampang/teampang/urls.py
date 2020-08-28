@@ -26,6 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('api-auth/', include('rest_framework.urls')),#오른쪽 위에 로그인/로그아웃 버튼 만들기
+
+    path("api/auth", include("knox.urls"))
 ]
 
 # app : 기능별?! 우리 분업별? 
