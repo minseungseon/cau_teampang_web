@@ -22,10 +22,10 @@ class MeetingCreateSerializer(serializers.ModelSerializer):
         fields = ['name', 'due_date', 'invite_url', 'team_input']
 
     def create(self, validated_data):
-        team_input = validated_data.pop('inputs')
+        inputs_data = validated_data.pop('team_input')
         # times_data = validated_data.pop('times')
         team = MeetingCreate.objects.create(**validated_data)
-        for input_data in team_input:
+        for input_data in inputs_data:
             # for time_data in times_data:
                 MeetingInput.objects.create(team=team, **input_data)
                 # MeetingInput.objects.create(team=team, **times_data)
