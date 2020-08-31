@@ -2,6 +2,7 @@ from .models import MeetingCreate, MeetingInput, MeetingTime
 from rest_framework import serializers
 
 class MeetingInputSerializer(serializers.ModelSerializer):
+    # user = UserSerializer(required=False) # May be an anonymous user.
     class Meta:
         model = MeetingInput
         fields = '__all__'
@@ -14,13 +15,13 @@ class MeetingTimeSerializer(serializers.ModelSerializer):
 
 class MeetingCreateSerializer(serializers.ModelSerializer):
     team_input = MeetingInputSerializer(many=True)
+    # times = MeetingTimeSerializer(source='MeetingTime_set',many=True)
     team_time = MeetingTimeSerializer(many=True)
 
     class Meta:
         model = MeetingCreate
-            # fields = '__all__'
-        fields = ['name', 'due_date', 'invite_url', 'team_input','team_time']
-
+        fields = '__all__'
+        
     def create(self, validated_data):
         inputs_data = validated_data.pop('team_input')
         times_data = validated_data.pop('team_time')
@@ -31,5 +32,10 @@ class MeetingCreateSerializer(serializers.ModelSerializer):
                 MeetingInput.objects.create(team=team, **times_data)
 
         return team
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.name)
+        instance.save()
+        return instance
 
 
