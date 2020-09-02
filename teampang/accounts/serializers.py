@@ -1,6 +1,6 @@
-from .models import Essay, Profile, Photo, Account
+from .models import Essay, Photo, Account, Profile, User#커스텀유저
 from rest_framework import serializers
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 
 class EssaySerializer(serializers.ModelSerializer): #User 모델 보여주기
 
@@ -26,7 +26,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('pk', 'author_name', 'profile_photo')
+        fields = ('pk')
 
 
 
@@ -41,11 +41,11 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer): #여기 수정하면 회원가입 해결
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password') #여기 수정하면 회원가입 해결
+        fields = ('id', 'email', 'password', 'nickname') #여기 수정하면 회원가입 해결
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        user = User.objects.create_user(validated_data['username'], validated_data['email'], validated_data['password'])
+        user =User.objects.create_user(validated_data['nickname'], validated_data['email'], validated_data['password'])
 
         return user
 

@@ -1,6 +1,6 @@
 from rest_framework import viewsets, serializers, generics, permissions #3,4번째는 유저+로그인기능
 from django.shortcuts import render
-from .models import Essay, Profile, Photo 
+from .models import Essay, Photo, Profile, User#커스텀유저
 from .serializers import EssaySerializer, PhotoSerializer, ProfileSerializer, UserSerializer, RegisterSerializer
 from rest_framework.filters import SearchFilter #일단 검색기능 불러오기 넣어놓았다
 from rest_framework.response import Response#유저기능
