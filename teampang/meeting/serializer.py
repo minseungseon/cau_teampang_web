@@ -7,7 +7,6 @@ class MeetingInputSerializer(serializers.ModelSerializer):
         model = MeetingInput
         fields = '__all__'
 
-
 class MeetingTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = MeetingTime
@@ -15,7 +14,6 @@ class MeetingTimeSerializer(serializers.ModelSerializer):
 
 class MeetingCreateSerializer(serializers.ModelSerializer):
     team_input = MeetingInputSerializer(many=True)
-    # times = MeetingTimeSerializer(source='MeetingTime_set',many=True)
     team_time = MeetingTimeSerializer(many=True)
 
     class Meta:
@@ -30,12 +28,9 @@ class MeetingCreateSerializer(serializers.ModelSerializer):
                 MeetingInput.objects.create(team=team, **input_data)
         for time_data in times_data:
                 MeetingInput.objects.create(team=team, **times_data)
-
         return team
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
         instance.save()
         return instance
-
-
