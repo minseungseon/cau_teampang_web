@@ -7,6 +7,7 @@ class MeetingCreate(models.Model):
     due_date = models.DateTimeField()
     invite_url = models.URLField()
     member_list = JSONField(null=True) #이후 User , no user로 확장 --> 민승: 초대 기능으로 확장하면 좋을 것 같음 
+    isOnlyDate = models.BooleanField()
     # author = models.ForeignKey(User, on_delete=models.CASCADE) #작성자 => 팀장
     def __str__(self):
         return '%s' % (self.name)
