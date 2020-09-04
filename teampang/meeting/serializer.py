@@ -28,9 +28,11 @@ class MeetingCreateSerializer(serializers.ModelSerializer):
                 MeetingInput.objects.create(team=team, **input_data)
         for time_data in times_data:
                 MeetingInput.objects.create(team=team, **times_data)
+
         return team
 
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
         instance.save()
         return instance
+
