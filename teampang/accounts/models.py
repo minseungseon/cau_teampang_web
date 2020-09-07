@@ -53,7 +53,7 @@ class UserManager(BaseUserManager):
     
     use_in_migrations = True    
     
-    def create_user(self, email, nickname, password=None):        
+    def create_user(self, email, nickname, birthdate, univ, major, gender, profile_photo, password=None):        
         
         if not email:            
             raise ValueError('must have user email')        
@@ -91,7 +91,40 @@ class User(AbstractBaseUser,PermissionsMixin):
         max_length=20,
         null=False,
         unique=True
-    )     
+    )
+
+    birthdate = models.DateField(default=None, null=True, blank=True)
+    #선택 변수 선언?
+    CAU = '중앙대'
+    OTHER = '타 대학'
+    CLOSED = '비공개'
+    SOFT = '솦트'
+    YOUNG = '융공'
+    BUILD = '건공'
+    MAN = '남'
+    WOMAN = '여'
+
+    UNIV_CHOICES = (
+        (CAU, '중앙대'),
+        (OTHER, '타 대학'),
+        (CLOSED, '비공개'),
+    )
+    univ = models.CharField(max_length=10, choices=UNIV_CHOICES, default=CLOSED, null=True, blank=True)
+    MAJOR_CHOICES = (
+        (SOFT, '솦트'),
+        (YOUNG, '융공'),
+        (BUILD, '건공'),
+        (CLOSED, '비공개'),
+    )
+    major = models.CharField(max_length=10, choices=MAJOR_CHOICES, default=CLOSED, null=True, blank=True)
+    GENDER_CHOICES = (
+        (CLOSED, '비공개'),
+        (MAN, '남'),
+        (WOMAN, '여'),
+    )
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default=None, null=True, blank=True)
+    profile_photo = models.ImageField(default=None, null=True, blank=True)
+
     is_active = models.BooleanField(default=True)    
     is_admin = models.BooleanField(default=False)    
     is_superuser = models.BooleanField(default=False)    
