@@ -1,32 +1,7 @@
-from .models import Essay, Photo, Account, Profile, User#커스텀유저
+from .models import User#커스텀유저
 from rest_framework import serializers
 #from django.contrib.auth.models import User
 
-class EssaySerializer(serializers.ModelSerializer): #User 모델 보여주기
-
-    author_name = serializers.ReadOnlyField(source='author.username')
-
-    class Meta:
-        model = Essay
-        fields = ('pk', 'title', 'body', 'author_name')
-
-class PhotoSerializer(serializers.ModelSerializer):
-
-    author_name = serializers.ReadOnlyField(source='author.username')
-    image = serializers.ImageField(use_url=True)
-
-    class Meta:
-        model = Photo
-        fields = ('pk', 'author_name', 'image')
-
-class ProfileSerializer(serializers.ModelSerializer):
-
-    author_name = serializers.ReadOnlyField(source='author.username')
-    image = serializers.ImageField(use_url=True)
-
-    class Meta:
-        model = Profile
-        fields = ('pk')
 
 
 

@@ -1,7 +1,7 @@
 from rest_framework import viewsets, serializers, generics, permissions #3,4번째는 유저+로그인기능
 from django.shortcuts import render
-from .models import Essay, Photo, Profile, User#커스텀유저
-from .serializers import EssaySerializer, PhotoSerializer, ProfileSerializer, UserSerializer, RegisterSerializer
+from .models import User#커스텀유저
+from .serializers import UserSerializer, RegisterSerializer
 from rest_framework.filters import SearchFilter #일단 검색기능 불러오기 넣어놓았다
 from rest_framework.response import Response#유저기능
 from knox.models import AuthToken#유저기능
@@ -11,7 +11,7 @@ from knox.views import LoginView as KnoxLoginView#로그인/아웃
 from rest_framework.decorators import api_view
 
 
-
+'''
 class EssayViewSet(viewsets.ModelViewSet):
 
     queryset = Essay.objects.all()
@@ -34,43 +34,7 @@ class EssayViewSet(viewsets.ModelViewSet):
             qs = qs.none()
 
         return qs
-
-
-class PhotoViewSet(viewsets.ModelViewSet):
-    queryset = Photo.objects.all()
-    serializer_class = PhotoSerializer
-
-
-    def get_queryset(self):#필터링
-        qs = super().get_queryset()
-
-
-        if self.request.user.is_authenticated:#만일 요청한 user가 로그인되어있다면
-            qs = qs.filter(author = self.request.user)#요청한 user의 글만 보여줌
-        else:
-            qs = qs.none()
-        return qs
-
-
-class ProfileViewSet(viewsets.ModelViewSet):
-
-    queryset = Profile.objects.all()
-    serializer_class = ProfileSerializer
-
-
-    def get_queryset(self):#필터링
-        qs = super().get_queryset()
-
-
-        if self.request.user.is_authenticated:#만일 요청한 user가 로그인되어있다면
-            qs = qs.filter(author = self.request.user)#요청한 user의 글만 보여줌
-        else:
-            qs = qs.none()
-
-        return qs
-
-
-
+'''
 
 #여기부터 유저 기능
 # Register API
@@ -96,7 +60,3 @@ class LoginAPI(KnoxLoginView):
         user = serializer.validated_data['user']
         login(request, user)
         return super(LoginAPI, self).post(request, format=None)
-
-
-
-

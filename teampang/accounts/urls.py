@@ -5,9 +5,7 @@ from .views import RegisterAPI, LoginAPI #위에서 import 했었는데 이거 �
 from knox import views as knox_views#로그인/로그아웃 기능
 
 router = DefaultRouter()
-router.register('essay', views.EssayViewSet)
-router.register('photo', views.PhotoViewSet)
-router.register('profile', views.ProfileViewSet)
+
 
 
 urlpatterns = [
