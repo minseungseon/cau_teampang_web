@@ -46,4 +46,12 @@ class MeetingTime(models.Model):
 # 	anonymous = jsonfield.JSONField() #비회원 정보 텍스트
 # 	number = models.IntegerField() # 멤버수
 #     meetingResult = models.ForeignKey(MeetingResult, on_delete=models.CASCADE)
+
+
+
+
+
+
+
+
     

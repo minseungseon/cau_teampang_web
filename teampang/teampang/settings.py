@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'accounts.User'
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'teampang.settings')
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'meeting',
+    'accounts',
+    'knox',#로그인/로그아웃 위해 추가로 설치해야 함 : pip install django-rest-knox
 ]
 
 MIDDLEWARE = [
@@ -124,6 +128,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': 'knox.auth.TokenAuthentication',
+    
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
+    
 }
