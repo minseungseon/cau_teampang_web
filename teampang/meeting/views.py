@@ -28,8 +28,18 @@ class MeetingCreateViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
+    @action(detail=True, methods=["patch"])
+    # 8000/meetingCreate/1/set_F_isOnlyDate
+    def set_F_isOnlyDate(self, request, pk):
+        instance = self.get_object()
+        instance.isOnlyDate = False 
+        instance.save
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
     @action(detail=True, methods=["POST"])
-    def meetingTime(self, request, pk=None):
+    # 8000/meetingCreate/1/dateMatching
+    def dateMatching(self, request, pk=None):
         team = self.get_object()
         data = request.data
         data["team"] = team.id
@@ -39,7 +49,18 @@ class MeetingCreateViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
-    #     team_inputs = MeetingInput.objects.filter(team=pk)
+    @action(detail=True, methods=["POST"])
+    # 8000/meetingCreate/1/timeMatching
+    def timeMatching(self, request, pk=None):
+        team = self.get_object()
+        data = request.data
+        data["team"] = team.id
+        serializer = MeetingTimeSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
+
     #     timetable_sum = [{"00-02":0}, {"02-04":0}, {"04-06":0}, {"06-08":0}, {"08-10":0}, {"10-12":0}, {"12-14":0}, {"14-16":0}, {"18-20":0}, {"20-22":0}, {"22-24":0}]
     #     # for input in team_inputs:
     #     #     json_input = json.load(input)
