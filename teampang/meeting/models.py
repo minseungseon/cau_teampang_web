@@ -32,7 +32,7 @@ class MeetingInput(models.Model): #MeetingDetail로 이름 바꾸기
 class MeetingTime(models.Model):
     team = models.ForeignKey(MeetingCreate, on_delete=models.CASCADE, related_name='team_time')
     matched_date = models.DateField()
-    matched_time = models.TimeField()
+    matched_time = models.TimeField(null=True)
 
     class Meta:
         unique_together = ['team', 'matched_date', 'matched_time']
