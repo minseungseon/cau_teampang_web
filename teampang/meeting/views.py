@@ -35,13 +35,20 @@ class MeetingCreateViewSet(viewsets.ModelViewSet):
         team = self.get_object()
         data = request.data #matched_time은 현재까지 null값으로 처리
         data["team"] = team.id
-        if team.isOnlyDate is False: 
-            self.timeMatching(request, pk) #시간정하기 호출
         serializer = MeetingTimeSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+
+    @action(detail=True, methods=["patch"])	
+    # 8000/meetingCreate/1/change_isOnlyDate/
+    def change_isOnlyDate(self, request, pk):	#isOnlyDate값 반전
+        instance = self.get_object()	
+        instance.isOnlyDate = not instance.isOnlyDate 	
+        instance.save()
+        serializer = self.get_serializer(instance)	
+        return Response(serializer.data)
 
     @action(detail=True, methods=["patch"])
     # 8000/meetingCreate/1/timeMatching/
