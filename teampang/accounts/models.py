@@ -26,14 +26,22 @@ class UserManager(BaseUserManager):
         user.set_password(password)        
         user.save(using=self._db)        
         return user
- 
-    def create_superuser(self, email, nickname,password ):        
+
+    def create_superuser(self, email, nickname, univ, birthdate, major, gender, profile_photo, password=None):        
        
         user = self.create_user(            
             email = self.normalize_email(email),            
-            nickname = nickname,            
-            password=password        
-        )        
+            nickname = nickname,
+            birthdate = birthdate,
+            univ = univ,
+            major = major,   
+            gender = gender,
+            profile_photo = profile_photo
+        )
+
+        user.set_password(password)
+
+
         user.is_admin = True        
         user.is_superuser = True        
         user.is_staff = True        
@@ -54,36 +62,23 @@ class User(AbstractBaseUser,PermissionsMixin):
         unique=True
     )
 
-    birthdate = models.DateField(default=None, blank=True)
+    birthdate = models.DateField(default=None, null=True, blank=True)
     #선택 변수 선언?
-    CAU = '중앙대'
-    OTHER = '타 대학'
     CLOSED = '비공개'
-    SOFT = '솦트'
-    YOUNG = '융공'
-    BUILD = '건공'
     MAN = '남'
     WOMAN = '여'
 
-    UNIV_CHOICES = (
-        (CAU, '중앙대'),
-        (OTHER, '타 대학'),
-        (CLOSED, '비공개'),
-    )
-    univ = models.CharField(max_length=10, choices=UNIV_CHOICES, default=CLOSED, blank=True)
-    MAJOR_CHOICES = (
-        (SOFT, '솦트'),
-        (YOUNG, '융공'),
-        (BUILD, '건공'),
-        (CLOSED, '비공개'),
-    )
-    major = models.CharField(max_length=10, choices=MAJOR_CHOICES, default=CLOSED, blank=True)
+
+    univ = models.CharField(max_length=10, default=CLOSED, null=True, blank=True)
+
+    major = models.CharField(max_length=10, default=CLOSED, null=True, blank=True)
+
     GENDER_CHOICES = (
         (CLOSED, '비공개'),
         (MAN, '남'),
         (WOMAN, '여'),
     )
-    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default=None, blank=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, null=True, default=None, blank=True)
     profile_photo = models.ImageField(default=None, null=True, blank=True)
 
     is_active = models.BooleanField(default=True)    
@@ -92,4 +87,4 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_staff = models.BooleanField(default=False)     
     date_joined = models.DateTimeField(auto_now_add=True)     
     USERNAME_FIELD = 'nickname'    
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ['email', 'univ', 'major', 'gender', 'profile_photo', 'birthdate']
