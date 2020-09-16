@@ -132,9 +132,9 @@ REST_FRAMEWORK = {
         'knox.auth.TokenAuthentication',
     ),
     
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
+#    'DEFAULT_PERMISSION_CLASSES': (
+#        'rest_framework.permissions.IsAuthenticated',
+#    ),
 
 #    'DEFAULT_PAGINATION_CLASS': (
 #        'rest_framework.pagination.PageNumberPagination',
