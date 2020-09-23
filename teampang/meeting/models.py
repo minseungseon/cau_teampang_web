@@ -39,7 +39,7 @@ class MeetingTime(models.Model):
         ordering = ['team']
     
     def __str__(self):
-        return '%d: %s , %s' % (self.team, self.matched_time, self.matched_time)
+        return '%s' % (self.team)
     
 # class MemberList(models.Model):
 # 	# authenticated = models. #유저 정보
