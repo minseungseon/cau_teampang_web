@@ -3,3 +3,4 @@ from .models import *
 
 admin.site.register(MeetingCreate)
 admin.site.register(MeetingInput)
+admin.site.register(MeetingTime)

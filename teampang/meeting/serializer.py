@@ -31,13 +31,13 @@ class MeetingCreateSerializer(serializers.ModelSerializer):
         ]
         
     def create(self, validated_data):
-        inputs_data = validated_data.pop('team_input')
+        inputs_data = validated_data.pop('team_input') #다른 모델은 pop으로 꺼낸다.
         times_data = validated_data.pop('team_time')
-        team = MeetingCreate.objects.create(**validated_data)
+        team = MeetingCreate.objects.create(**validated_data) #모델생성1
         for input_data in inputs_data:
-                MeetingInput.objects.create(team=team, **input_data)
+                MeetingInput.objects.create(team=team, **input_data) #모델생성2
         for time_data in times_data:
-                MeetingTime.objects.create(team=team, **times_data)
+                MeetingTime.objects.create(team=team, **times_data) #모델 생성3
         return team
 
     def update(self, instance, validated_data):
@@ -51,7 +51,7 @@ class MeetingCreateSerializer(serializers.ModelSerializer):
         instance.isOnlyDate = validated_data.get('isOnlyDate', instance.isOnlyDate)
         instance.save()
 
-        keep_times = []
+        keep_times = [] 
         existing_ids = [t.id for t in instance.team_time.all()]
         for time_data in times_data:
             if "id" in time_data.keys():
