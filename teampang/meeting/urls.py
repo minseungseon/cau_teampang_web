@@ -9,4 +9,5 @@ router.register(r'meetingTimes', views.MeetingTimeViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    oa( '///' as_view(sdfsdfsd). , dsfjzklfsd)
 ]
