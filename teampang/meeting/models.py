@@ -19,4 +19,4 @@ class DummyPlan(models.Model): #MeetingDetail로 이름 바꾸기
     date = JSONField(null=True)
     
     def __str__(self):
-        return '%s' % (self.)
+        return 'connected_plan = %s, name = %s' % (self.connected_plan, self.name)

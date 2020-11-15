@@ -9,8 +9,8 @@ import json
 
 class PlanViewSet(viewsets.ModelViewSet):
     queryset = Plan.objects.all()
-    serializer_class = DummyPlanSerializer
+    serializer_class = PlanSerializer
 
 class DummyPlanViewSet(viewsets.ModelViewSet):
     queryset = DummyPlan.objects.all()
-    serializer_class = MeetingInputSerializer
+    serializer_class = DummyPlanSerializer
