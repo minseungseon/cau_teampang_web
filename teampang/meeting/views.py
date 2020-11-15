@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import MeetingCreate, MeetingInput, MeetingTime
+from .models import Plan, DummyPlan
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
