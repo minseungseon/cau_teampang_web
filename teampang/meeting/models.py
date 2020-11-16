@@ -6,7 +6,7 @@ class Plan(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     date_range = JSONField(null=True)
-    confirmed_date = models.DateTimeField()
+    confirmed_date = models.DateTimeField(null=True)
     invite_url = models.URLField()
     member_list = JSONField(null=True)
     
