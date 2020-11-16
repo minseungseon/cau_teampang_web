@@ -3,9 +3,8 @@ from rest_framework.routers import DefaultRouter
 from . import views 
 
 router = DefaultRouter()
-router.register(r'meetingCreates', views.MeetingCreateViewSet)
-router.register(r'meetingInputs', views.MeetingInputViewSet)
-router.register(r'meetingTimes', views.MeetingTimeViewSet)
+router.register(r'Plan', views.PlanViewSet)
+router.register(r'DummyPlan', views.DummyPlanViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
