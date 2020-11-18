@@ -20,7 +20,7 @@ class PlanViewSet(viewsets.ModelViewSet):
 
     @action(detail = True, methods = ["GET"])
     # 팀플 이름과 날짜만 포함된 리스트 데이터 가져오기
-    def getTeampList(self, request, pk):
+    def getPlanList(self, request, pk):
         serializer = MainPagePlanListSerializer(queryset, many=True)
         return Response(serializer.data, status=200)
         
