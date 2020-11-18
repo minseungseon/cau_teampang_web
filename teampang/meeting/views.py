@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.http import HttpResponse
-from .serializer import PlanSerializer, DummyPlanSerializer
+from .serializer import *
 import json
 
 class PlanViewSet(viewsets.ModelViewSet):
@@ -17,6 +17,15 @@ class PlanViewSet(viewsets.ModelViewSet):
     # 현재 일정 개수 넘겨주기 (+이미 날짜가 지났다면 제외하기)
     def getNumberOfPlan(self, request, pk): 
         pass
+
+    @action(detail = True, methods = ["GET"])
+    # 팀플 이름과 날짜만 포함된 리스트 데이터 가져오기
+    def getPlanList(self, request, pk):
+        plan = self.get_object
+        serializer = MainPagePlanListSerializer(plan, many=True)
+        return Response(serializer.data, status=200)
+        
+        
 
 #################### page 4-1 ####################
     @action(detail = True, methods = ["POST"])
@@ -51,8 +60,8 @@ class PlanViewSet(viewsets.ModelViewSet):
     def sharePlanToKakao(self, request, pk): 
         pass    
     
-# @action(detail=True, methods=["GET"])
-#     def meetingInputs(self, request, pk=None):
+#   @action(detail=True, methods=["GET"])
+#   def meetingInputs(self, request, pk=None):
 #         team = self.get_object()    #team은 곧 meetingCreate의 pk값을 의미	        team = self.get_object()    #team은 곧 meetingCreate의 pk값을 의미
 #         meetingimputs = MeetingInput.objects.filter(team=team)	 
 #         serializer = MeetingInputSerializer(meetingimputs, many=True)
