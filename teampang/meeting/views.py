@@ -13,19 +13,19 @@ class PlanViewSet(viewsets.ModelViewSet):
 
 #################### page 4 ####################
 
-    @action(detail = True, method = ["GET"])
+    @action(detail = True, methods = ["GET"])
     # 현재 일정 개수 넘겨주기 (+이미 날짜가 지났다면 제외하기)
     def getNumberOfPlan(self, request, pk): 
         pass
 
 #################### page 4-1 ####################
-    @action(detail = True, method = ["POST"])
+    @action(detail = True, methods = ["POST"])
     # confirmed date 제외하고 생성
     def makeUnconfirmedPlan(self, request, pk):
         pass
 
 #################### page 4-2 ####################
-    @action(detail = True, method = ["GET"])
+    @action(detail = True, methods = ["GET"])
     # 링크 복사하기
     def copyLink(self, request, pk): 
         pass
@@ -35,13 +35,13 @@ class PlanViewSet(viewsets.ModelViewSet):
         pass    
 
 #################### page 6-0 ####################
-@action(detail = True, method = ["PATCH"])
+    @action(detail = True, methods = ["PATCH"])
     # 일정 수합하기
     def determinePlan(self, request, pk): 
         pass
 
 #################### page 6-1 ####################
-@action(detail = True, method = ["PATCH"])
+    @action(detail = True, methods = ["PATCH"])
     # 일정 수정하기(팀장 버전/ 팀원 버전?)
     def editPlan(self, request, pk): 
         pass
