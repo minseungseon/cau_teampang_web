@@ -18,10 +18,10 @@ class PlanViewSet(viewsets.ModelViewSet):
     def getNumberOfPlan(self, request, pk): 
         pass
 
-    @action(detail = True, methods = ["GET"])
+    @action(detail = False, methods = ["GET"])
     # 팀플 이름과 날짜만 포함된 리스트 데이터 가져오기
-    def getPlanList(self, request, pk):
-        plan = self.get_object
+    def getPlanList(self, request):
+        plan = Plan.objects.all()
         serializer = MainPagePlanListSerializer(plan, many=True)
         return Response(serializer.data, status=200)
         
