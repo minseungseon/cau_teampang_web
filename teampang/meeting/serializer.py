@@ -11,7 +11,8 @@ class MainPagePlanListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Plan
-        fields = ('name', 'confirmed_date')
+        fields = ['name', 'confirmed_date']
+
 
 class PlanSerializer(serializers.ModelSerializer):
 

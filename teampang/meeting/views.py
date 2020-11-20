@@ -11,12 +11,18 @@ class PlanViewSet(viewsets.ModelViewSet):
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer
 
+    #author의 primary key로 연결
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 #################### page 4 ####################
 
-    @action(detail = True, methods = ["GET"])
+    @action(detail = False)
     # 현재 일정 개수 넘겨주기 (+이미 날짜가 지났다면 제외하기)
     def getNumberOfPlan(self, request, pk): 
+        # 프론트에서 planlist 원소 수 세는 방법이 더 효율적
         pass
+        
 
     @action(detail = False, methods = ["GET"])
     # 팀플 이름과 날짜만 포함된 리스트 데이터 가져오기
@@ -24,8 +30,7 @@ class PlanViewSet(viewsets.ModelViewSet):
         plan = request.user.plans.all()
         serializer = MainPagePlanListSerializer(plan, many=True)
         return Response(serializer.data, status=200)
-        
-        
+    
 
 #################### page 4-1 ####################
     @action(detail = True, methods = ["POST"])
