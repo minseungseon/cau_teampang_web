@@ -33,22 +33,25 @@ class PlanViewSet(viewsets.ModelViewSet):
     def getPlanList(self, request):
         plan = request.user.plans.all()
         serializer = MainPagePlanListSerializer(plan, many=True)
+        #serializer = PlanSerializer(plan, fields=('name', 'confirmed_date'), many=True) #dynamic serializer fields
         return Response(serializer.data, status=200)
+
 #################### page 4-1 ####################
-    @action(detail = True, methods = ["POST"])
-    # confirmed date 제외하고 생성
-    def makeUnconfirmedPlan(self, request, pk):
-        # user = serializers.HiddenField(
-        #    default=serializers.CurrentUserDefault(),
-        # )   
-        #permission_classes = (IsAuthenticated,)
-        serializer = CreateUnconfirmedPlanSerializer(data=request.data)
-        print(CurrentUserDefault())
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=201)
-        else:
-            return Response(serializer.errors, status=400)
+    # @action(detail = True, methods = ["POST"])
+    # # confirmed date 제외하고 생성
+    # def makeUnconfirmedPlan(self, request, pk):
+    #     # user = serializers.HiddenField(
+    #     #    default=serializers.CurrentUserDefault(),
+    #     # )   
+    #     #permission_classes = (IsAuthenticated,)
+    #     #serializer = CreateUnconfirmedPlanSerializer(data=request.data)
+    #     serializer = PlanSerializer(fields=(name, ))
+    #     print(CurrentUserDefault())
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=201)
+    #     else:
+    #         return Response(serializer.errors, status=400)
 
 #################### page 4-2 ####################
     @action(detail = True, methods = ["GET"])
