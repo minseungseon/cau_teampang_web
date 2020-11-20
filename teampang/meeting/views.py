@@ -10,7 +10,7 @@ import json
 class PlanViewSet(viewsets.ModelViewSet):
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer
-    permission_classes = [IsAuthenticated] 나중에 권한 있을 때만 사용가능하게도 해줘야함.
+    # permission_classes = [IsAuthenticated] 나중에 권한 있을 때만 사용가능하게도 해줘야함.
 
     #author의 primary key로 연결
     def perform_create(self, serializer):
@@ -20,18 +20,20 @@ class PlanViewSet(viewsets.ModelViewSet):
 
     @action(detail = False)
     # 현재 일정 개수 넘겨주기 (+이미 날짜가 지났다면 제외하기)
-    def getNumberOfPlan(self, request, pk): 
-        # 프론트에서 planlist 원소 수 세는 방법이 더 효율적
-        pass
+    # 시리얼라이저 없이 직접 data 넘겨주도록 했음. 프론트에서 planlist 원소 수 세는 방법이 더 효율적일까요?
+    def getNumberOfPlan(self, request): 
+        # 나의 일정 개수 처리
+        num = dict(number_of_plan=request.user.plans.count())
+        # 딕셔너리로 넘어간다.... !?
+        #json_num = json.dumps(num) # "{\"number_of_plan\": 1}"
+        return Response(num, status=202) #"number_of_plan": 1
         
-
     @action(detail = False, methods = ["GET"])
     # 팀플 이름과 날짜만 포함된 리스트 데이터 가져오기
     def getPlanList(self, request):
-        plan = request.user.Plans.all()
+        plan = request.user.plans.all()
         serializer = MainPagePlanListSerializer(plan, many=True)
         return Response(serializer.data, status=200)
-
 #################### page 4-1 ####################
     @action(detail = True, methods = ["POST"])
     # confirmed date 제외하고 생성
