@@ -9,8 +9,8 @@ class Plan(models.Model):
     name = models.CharField(max_length=30)
     date_range = JSONField()
     confirmed_date = models.DateTimeField(null=True)
-    invite_url = models.URLField(null=True)
-    member_list = JSONField(null=True)
+    invite_url = models.URLField(null = True, blank = True)
+    member_list = JSONField(null = True, blank=True)
     
     # class Meta:
     #     ordering = ['confirmed_date']
