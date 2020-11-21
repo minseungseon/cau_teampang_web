@@ -82,7 +82,7 @@ class PlanViewSet(viewsets.ModelViewSet):
     @action(detail = True, methods = ["POST"])
     # 링크 복사하기
     def createDummyPlan(self, request, pk): 
-        
+        pass
     
 #   @action(detail=True, methods=["GET"])
 #   def meetingInputs(self, request, pk=None):
