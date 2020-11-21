@@ -32,8 +32,7 @@ class PlanViewSet(viewsets.ModelViewSet):
     # 팀플 이름과 날짜만 포함된 리스트 데이터 가져오기
     def getPlanList(self, request):
         plan = request.user.plans.all()
-        serializer = MainPagePlanListSerializer(plan, many=True)
-        #serializer = PlanSerializer(plan, fields=('name', 'confirmed_date'), many=True) #dynamic serializer fields
+        serializer = PlanSerializer(plan, fields=('name', 'confirmed_date'), many=True) #dynamic serializer fields
         return Response(serializer.data, status=200)
 
 #################### page 4-1 ####################
@@ -65,20 +64,25 @@ class PlanViewSet(viewsets.ModelViewSet):
 
 #################### page 6-0 ####################
     @action(detail = True, methods = ["PATCH"])
-    # 일정 수합하기
+    # dummyPlan들 넘기기
     def determinePlan(self, request, pk): 
         pass
 
 #################### page 6-1 ####################
     @action(detail = True, methods = ["PATCH"])
-    # 일정 수정하기(팀장 버전/ 팀원 버전?)
+    # 일정 수정하기(팀장 버전)
     def editPlan(self, request, pk): 
         pass
 
 #################### page 6-6 ####################
     # 카카오톡으로 결정된 날짜 공유하기
     def sharePlanToKakao(self, request, pk): 
-        pass    
+        pass
+
+    @action(detail = True, methods = ["POST"])
+    # 링크 복사하기
+    def createDummyPlan(self, request, pk): 
+        
     
 #   @action(detail=True, methods=["GET"])
 #   def meetingInputs(self, request, pk=None):
