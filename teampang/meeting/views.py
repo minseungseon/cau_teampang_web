@@ -10,7 +10,7 @@ import json
 class PlanViewSet(viewsets.ModelViewSet):
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer
-    # permission_classes = [IsAuthenticated] 나중에 권한 있을 때만 사용가능하게도 해줘야함.
+    # permission_classes = [IsAuthenticated] 나중에 권한 있을 때만 사용가능하게도 해줘야l함.
 
     #author의 primary key로 연결
     def perform_create(self, serializer):
@@ -32,8 +32,7 @@ class PlanViewSet(viewsets.ModelViewSet):
     # 팀플 이름과 날짜만 포함된 리스트 데이터 가져오기
     def getPlanList(self, request):
         plan = request.user.plans.all()
-        serializer = MainPagePlanListSerializer(plan, many=True)
-        #serializer = PlanSerializer(plan, fields=('name', 'confirmed_date'), many=True) #dynamic serializer fields
+        serializer = PlanSerializer(plan, fields=('name', 'confirmed_date'), many=True) #dynamic serializer fields
         return Response(serializer.data, status=200)
 
 #################### page 4-1 ####################
@@ -64,6 +63,11 @@ class PlanViewSet(viewsets.ModelViewSet):
         pass    
 
 #################### page 6-0 ####################
+    @action(detail = True, methods = ["PATCH"])
+    # dummyPlan들 넘기기
+    def determinePlan(self, request, pk): 
+        pass
+=======
     @action(detail = True, methods = ["GET"])
     # send dummy plans 
     def getDummyPlans(self, request, pk): 
@@ -74,24 +78,23 @@ class PlanViewSet(viewsets.ModelViewSet):
 
 #################### page 6-1 ####################
     @action(detail = True, methods = ["PATCH"])
-    # 일정 수정하기(팀장 버전/ 팀원 버전?)
+    # 일정 수정하기(팀장 버전)
     def editPlan(self, request, pk): 
         pass
 
 #################### page 6-6 ####################
     # 카카오톡으로 결정된 날짜 공유하기
     def sharePlanToKakao(self, request, pk): 
-        pass    
+        pass
+
+    @action(detail = True, methods = ["POST"])
+    # 링크 복사하기
+    def createDummyPlan(self, request, pk): 
+        pass
     
 #   @action(detail=True, methods=["GET"])
 #   def meetingInputs(self, request, pk=None):
 #         team = self.get_object()    #team은 곧 meetingCreate의 pk값을 의미	        team = self.get_object()    #team은 곧 meetingCreate의 pk값을 의미
 #         meetingimputs = MeetingInput.objects.filter(team=team)	 
 #         serializer = MeetingInputSerializer(meetingimputs, many=True)
-#         return Response(serializer.data, status=200)	      
-
-
-
-class DummyPlanViewSet(viewsets.ModelViewSet):
-    queryset = DummyPlan.objects.all()
-    serializer_class = DummyPlanSerializer
+#         return Response(serializer.data, status=200)
