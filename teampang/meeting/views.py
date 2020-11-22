@@ -67,14 +67,14 @@ class PlanViewSet(viewsets.ModelViewSet):
     # dummyPlan들 넘기기
     def determinePlan(self, request, pk): 
         pass
-=======
+
     @action(detail = True, methods = ["GET"])
     # send dummy plans 
     def getDummyPlans(self, request, pk): 
         plan = self.get_object()
         dummy_plans = plan.dummy_plans.all()
         serializer = DummyPlanSerializer(dummy_plans, many=True)
-        return Response(serializer.data, status=200)	   
+        return Response(serializer.data, status=200)
 
 #################### page 6-1 ####################
     @action(detail = True, methods = ["PATCH"])
@@ -90,11 +90,10 @@ class PlanViewSet(viewsets.ModelViewSet):
     @action(detail = True, methods = ["POST"])
     # dummyPlan 작성
     def createDummyPlan(self, request, pk): 
-        print("Hello")
-        serializer = DummyPlanSerializer(data = request.data)
-        print(serializer)
+        plan = self.get_object()
+        serializer = DummyPlanSerializer(DummyPlan(), fields=('name', 'date'), data = request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(connected_plan=plan)
             return Response(serializer.data, status=201)
         else:
             return Response(serializer.errors, status=400)

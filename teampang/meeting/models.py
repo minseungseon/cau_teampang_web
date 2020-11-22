@@ -26,4 +26,4 @@ class DummyPlan(models.Model): #MeetingDetail로 이름 바꾸기
     #     ordering = ['confirmed_date']
 
     def __str__(self):
-        return 'connected_plan = %s, name = %s' % (self.connected_plan, self.name)
+        return 'connected_plan: %s, name: %s' % (self.connected_plan, self.name)
