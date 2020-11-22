@@ -88,9 +88,16 @@ class PlanViewSet(viewsets.ModelViewSet):
         pass
 
     @action(detail = True, methods = ["POST"])
-    # 링크 복사하기
+    # dummyPlan 작성
     def createDummyPlan(self, request, pk): 
-        pass
+        print("Hello")
+        serializer = DummyPlanSerializer(data = request.data)
+        print(serializer)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        else:
+            return Response(serializer.errors, status=400)
     
 #   @action(detail=True, methods=["GET"])
 #   def meetingInputs(self, request, pk=None):
