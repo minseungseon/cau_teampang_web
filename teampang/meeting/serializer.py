@@ -22,7 +22,7 @@ class DynamicFieldsModelSerializer(serializers.ModelSerializer):
             for field_name in existing - allowed:
                 self.fields.pop(field_name)
 
-class DummyPlanSerializer(serializers.ModelSerializer):
+class DummyPlanSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = DummyPlan
         fields = '__all__'
