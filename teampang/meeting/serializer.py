@@ -28,7 +28,8 @@ class DummyPlanSerializer(DynamicFieldsModelSerializer):
         fields = '__all__'
 
 class PlanSerializer(DynamicFieldsModelSerializer):
-
+    id = serializers.IntegerField(read_only=True)
+    invite_url= serializers.URLField(default = "http://127.0.0.1:8000/Plan/"+ str(id) +"/createDummyPlan")
     class Meta:
         model = Plan
         fields = '__all__'
