@@ -21,7 +21,7 @@ class Plan(models.Model):
 class DummyPlan(models.Model): #MeetingDetail로 이름 바꾸기
     connected_plan = models.ForeignKey(Plan, related_name='DummyPlan', on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
-    date = JSONField(null=True)
+    date = JSONField(null = True, blank = True)
     
     # class Meta:
     #     ordering = ['confirmed_date']

@@ -23,11 +23,10 @@ class DynamicFieldsModelSerializer(serializers.ModelSerializer):
                 self.fields.pop(field_name)
 
 class DummyPlanSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = DummyPlan
         fields = '__all__'
-        
+
 class PlanSerializer(DynamicFieldsModelSerializer):
 
     class Meta:
