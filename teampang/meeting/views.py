@@ -91,8 +91,6 @@ class PlanViewSet(viewsets.ModelViewSet):
     # dummyPlan 작성
     def createDummyPlan(self, request, pk): 
         plan = self.get_object()
-        print(DummyPlan)
-        print(DummyPlan())
         serializer = DummyPlanSerializer(DummyPlan(), fields=('name', 'date'), data = request.data)
         if serializer.is_valid():
             serializer.save(connected_plan=plan)

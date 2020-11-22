@@ -13,7 +13,7 @@ class DynamicFieldsModelSerializer(serializers.ModelSerializer):
         fields = kwargs.pop('fields', None)
 
         # Instantiate the superclass normally
-        super(DynamicFieldsModelSerializer, self).__init__(*args, **kwargs)
+        super(DynamicFieldsModelSerializer, self).__init__(*args, **kwargs) 
 
         if fields is not None:
             # Drop any fields that are not specified in the `fields` argument.
