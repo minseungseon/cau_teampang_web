@@ -5,7 +5,6 @@ from jsonfield import JSONField
 class Plan(models.Model):
 
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name = 'plans', null = True)
-
     name = models.CharField(max_length=30)
     date_range = JSONField()
     confirmed_date = models.DateTimeField(null=True)
@@ -19,7 +18,7 @@ class Plan(models.Model):
         return '%s' % (self.name)
 
 class DummyPlan(models.Model): #MeetingDetail로 이름 바꾸기
-    connected_plan = models.ForeignKey(Plan, related_name='DummyPlan', on_delete=models.CASCADE)
+    connected_plan = models.ForeignKey(Plan, related_name='dummy_plans', on_delete=models.CASCADE)
     name = models.CharField(max_length=30)
     date = JSONField(null=True)
     

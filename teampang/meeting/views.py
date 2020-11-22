@@ -64,10 +64,13 @@ class PlanViewSet(viewsets.ModelViewSet):
         pass    
 
 #################### page 6-0 ####################
-    @action(detail = True, methods = ["PATCH"])
-    # 일정 수합하기
-    def determinePlan(self, request, pk): 
-        pass
+    @action(detail = True, methods = ["GET"])
+    # send dummy plans 
+    def getDummyPlans(self, request, pk): 
+        plan = self.get_object()
+        dummy_plans = plan.dummy_plans.all()
+        serializer = DummyPlanSerializer(dummy_plans, many=True)
+        return Response(serializer.data, status=200)	   
 
 #################### page 6-1 ####################
     @action(detail = True, methods = ["PATCH"])
