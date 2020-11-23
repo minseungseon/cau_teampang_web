@@ -54,12 +54,18 @@ class PlanViewSet(viewsets.ModelViewSet):
 
 #################### page 6-0 #################### 
     @action(detail = True, methods = ["PATCH"]) 
-    # dummyPlan들 넘기기 
-    def determinePlan(self, request, pk): 
-        pass 
+    # 일정 확정 짓기
+    def confirmPlanDate(self, request, pk):
+        plan = self.get_object()
+        serializer = PlanSerializer(plan, fields=('confirmed_date',), data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        else:
+            return Response(serializer.errors, status=400)
 
     @action(detail = True, methods = ["GET"]) 
-    # send dummy plans 
+    # 더미플랜들 받기
     def getDummyPlans(self, request, pk): 
         plan = self.get_object() #현재 pk값의 object를 get함. 
         dummy_plans = plan.dummy_plans.all() 

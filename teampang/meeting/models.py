@@ -4,10 +4,10 @@ from jsonfield import JSONField
 
 class Plan(models.Model):
 
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name = 'plans', null = True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name = 'plans', null = True) #null = True 해도 되나
     name = models.CharField(max_length=30)
     date_range = JSONField()
-    confirmed_date = models.DateTimeField(null=True)
+    confirmed_date = JSONField(null=True, blank = True)
     invite_url = models.URLField(null = True, blank = True)
     member_list = JSONField(null = True, blank=True)
     
