@@ -35,6 +35,8 @@ class PlanViewSet(viewsets.ModelViewSet):
 
     #plan 생성
     def perform_create(self, serializer):
+        print("perform_create:::")
+        print(self.request.user)
         plan = serializer.save(author=self.request.user) #author의 primary key로 연결
         plan.invite_url = "http://127.0.0.1:8000/Plan/"+ str(plan.id) +"/createDummyPlan"
         plan.save()
