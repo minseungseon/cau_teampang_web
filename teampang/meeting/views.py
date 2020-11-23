@@ -70,13 +70,7 @@ class PlanViewSet(viewsets.ModelViewSet):
         plan = self.get_object() #현재 pk값의 object를 get함. 
         dummy_plans = plan.dummy_plans.all() 
         serializer = DummyPlanSerializer(dummy_plans, many=True) 
-        return Response(serializer.data, status=200) 
-
-#################### page 6-1 ####################
-    @action(detail = True, methods = ["PATCH"])
-    # 일정 수정하기(팀장 버전)
-    def editPlan(self, request, pk): 
-        pass
+        return Response(serializer.data, status=200)
 
 #################### page 6-6 ####################
     # 카카오톡으로 결정된 날짜 공유하기
