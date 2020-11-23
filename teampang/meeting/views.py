@@ -69,11 +69,20 @@ class PlanViewSet(viewsets.ModelViewSet):
         dummy_plans = plan.dummy_plans.all() 
         serializer = DummyPlanSerializer(dummy_plans, many=True) 
         return Response(serializer.data, status=200)
+        
+    @action(detail = True, methods = ["DELETE"]) 
+    # 더미플랜들 받기
+    def deleteDummyPlan(self, request, pk): 
+        pass
 
 #################### page 6-6 ####################
+
+    @action(detail = True, methods = ["GET"]) 
     # 카카오톡으로 결정된 날짜 공유할 때 사용할 데이터 전송
-    def sharePlanToKakao(self, request, pk): 
-        pass
+    def getPlanConfirmedDate(self, request, pk): 
+        plan = self.get_object()
+        serializer = PlanSerializer(plan, fields=('name', 'confirmed_date')) #dynamic serializer fields
+        return Response(serializer.data, status=200)
 
     @action(detail = True, methods = ["POST"])
     # dummyPlan 작성
