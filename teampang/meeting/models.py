@@ -9,7 +9,6 @@ class Plan(models.Model):
     date_range = JSONField()
     confirmed_date = JSONField(null=True, blank = True)
     invite_url = models.URLField(null = True, blank = True)
-    member_list = JSONField(null = True, blank=True)
     
     # class Meta:
     #     ordering = ['confirmed_date']
