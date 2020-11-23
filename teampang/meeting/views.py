@@ -12,10 +12,6 @@ class PlanViewSet(viewsets.ModelViewSet):
     serializer_class = PlanSerializer
     # permission_classes = [IsAuthenticated] 나중에 권한 있을 때만 사용가능하게도 해줘야l함.
 
-    #author의 primary key로 연결
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
-
 #################### page 4 ####################
 
     @action(detail = False)
@@ -36,45 +32,39 @@ class PlanViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=200)
 
 #################### page 4-1 ####################
-    # @action(detail = True, methods = ["POST"])
-    # # confirmed date 제외하고 생성
-    # def makeUnconfirmedPlan(self, request, pk):
-    #     # user = serializers.HiddenField(
-    #     #    default=serializers.CurrentUserDefault(),
-    #     # )   
-    #     #permission_classes = (IsAuthenticated,)
-    #     #serializer = CreateUnconfirmedPlanSerializer(data=request.data)
-    #     serializer = PlanSerializer(fields=(name, ))
-    #     print(CurrentUserDefault())
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data, status=201)
-    #     else:
-    #         return Response(serializer.errors, status=400)
+
+    #plan 생성
+    def perform_create(self, serializer):
+        plan = serializer.save(author=self.request.user) #author의 primary key로 연결
+        plan.invite_url = "http://127.0.0.1:8000/Plan/"+ str(plan.id) +"/createDummyPlan"
+        plan.save()
 
 #################### page 4-2 ####################
+
     @action(detail = True, methods = ["GET"])
     # 링크 복사하기
-    def copyLink(self, request, pk): 
-        pass
+    def getLink(self, request, pk): 
+        plan = self.get_object()
+        serializer = PlanSerializer(plan, fields=('invite_url',)) #dynamic serializer fields
+        return Response(serializer.data, status=200)
 
     # 카카오톡으로 공유하기
     def shareLinkToKakao(self, request, pk): 
-        pass    
+        pass 
 
-#################### page 6-0 ####################
-    @action(detail = True, methods = ["PATCH"])
-    # dummyPlan들 넘기기
+#################### page 6-0 #################### 
+    @action(detail = True, methods = ["PATCH"]) 
+    # dummyPlan들 넘기기 
     def determinePlan(self, request, pk): 
-        pass
+        pass 
 
-    @action(detail = True, methods = ["GET"])
+    @action(detail = True, methods = ["GET"]) 
     # send dummy plans 
     def getDummyPlans(self, request, pk): 
-        plan = self.get_object()
-        dummy_plans = plan.dummy_plans.all()
-        serializer = DummyPlanSerializer(dummy_plans, many=True)
-        return Response(serializer.data, status=200)
+        plan = self.get_object() #현재 pk값의 object를 get함. 
+        dummy_plans = plan.dummy_plans.all() 
+        serializer = DummyPlanSerializer(dummy_plans, many=True) 
+        return Response(serializer.data, status=200) 
 
 #################### page 6-1 ####################
     @action(detail = True, methods = ["PATCH"])
@@ -97,10 +87,3 @@ class PlanViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=201)
         else:
             return Response(serializer.errors, status=400)
-    
-#   @action(detail=True, methods=["GET"])
-#   def meetingInputs(self, request, pk=None):
-#         team = self.get_object()    #team은 곧 meetingCreate의 pk값을 의미	        team = self.get_object()    #team은 곧 meetingCreate의 pk값을 의미
-#         meetingimputs = MeetingInput.objects.filter(team=team)	 
-#         serializer = MeetingInputSerializer(meetingimputs, many=True)
-#         return Response(serializer.data, status=200)

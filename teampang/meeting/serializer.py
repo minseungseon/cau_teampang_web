@@ -11,7 +11,6 @@ class DynamicFieldsModelSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         # Don't pass the 'fields' arg up to the superclass
         fields = kwargs.pop('fields', None)
-
         # Instantiate the superclass normally
         super(DynamicFieldsModelSerializer, self).__init__(*args, **kwargs) 
 
@@ -28,8 +27,7 @@ class DummyPlanSerializer(DynamicFieldsModelSerializer):
         fields = '__all__'
 
 class PlanSerializer(DynamicFieldsModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-    invite_url= serializers.URLField(default = "http://127.0.0.1:8000/Plan/"+ str(id) +"/createDummyPlan")
+    
     class Meta:
         model = Plan
         fields = '__all__'
