@@ -50,10 +50,6 @@ class PlanViewSet(viewsets.ModelViewSet):
         serializer = PlanSerializer(plan, fields=('invite_url',)) #dynamic serializer fields
         return Response(serializer.data, status=200)
 
-    # 카카오톡으로 공유하기
-    def shareLinkToKakao(self, request, pk): 
-        pass 
-
 #################### page 6-0 #################### 
     @action(detail = True, methods = ["PATCH"]) 
     # 일정 확정 짓기
@@ -75,7 +71,7 @@ class PlanViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=200)
 
 #################### page 6-6 ####################
-    # 카카오톡으로 결정된 날짜 공유하기
+    # 카카오톡으로 결정된 날짜 공유할 때 사용할 데이터 전송
     def sharePlanToKakao(self, request, pk): 
         pass
 
