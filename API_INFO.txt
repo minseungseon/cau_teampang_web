@@ -61,5 +61,5 @@ Request data: confirmed_date(JSONField)
 
 * page 6-4 : 
 id=pk인 Plan의 약속 날짜를 받아오는 api
-[GET] http://127.0.0.1:8000/Plan/<pk>/confirmPlanDate
+[GET] http://127.0.0.1:8000/Plan/<pk>/getPlanConfirmedDate
 Response data: name(CharField), confirmed_date(JSONField)
