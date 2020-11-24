@@ -1,16 +1,18 @@
 from django.shortcuts import render
 from .models import Plan, DummyPlan
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.http import HttpResponse
 from .serializer import *
 import json
 
+from .permissions import IsAuthorDelete
+
 class PlanViewSet(viewsets.ModelViewSet):
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer
-    # permission_classes = [IsAuthenticated] 나중에 권한 있을 때만 사용가능하게도 해줘야l함.  이거 !!! 다시 봐보기
+    # permission_classes = [permissions.IsAuthenticated]
 
 #################### page 4 ####################
 
@@ -113,9 +115,10 @@ class PlanViewSet(viewsets.ModelViewSet):
 class DummyPlanViewSet(viewsets.ModelViewSet):
     queryset = DummyPlan.objects.all()
     serializer_class = DummyPlanSerializer
+    permission_classes = [IsAuthorDelete]
 
     # override destroy
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    # def destroy(self, request, *args, **kwargs):
+    #     instance = self.get_object()
+    #     self.perform_destroy(instance)
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
