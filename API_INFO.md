@@ -1,0 +1,65 @@
+## Backend
+
+account 앱
+* Resgister : 
+회원가입을 요청하는 api
+[POST] http://127.0.0.1:8000/auth/register/
+Request Data: username, password
+
+* Login : 
+로그인을 요청하는 api
+[POST] http://127.0.0.1:8000/auth/login/
+Request Data: username, password
+
+* User 추가 정보 입력 : 
+추가 정보를 입력 요청하는 api
+[POST] http://127.0.0.1:8000/auth/profile/<int:user_pk>/update/
+Request Data: nickname, email
+
+
+meeting 앱
+
+page 번호는 TeampAng Lite.xd 파일에서 앱 화면 번호를 참고
+
+* page 4 : 
+자신의 일정 개수 받아오는 api
+[GET] http://127.0.0.1:8000/Plan/getNumberOfPlan
+Response data: num(Integer)
+
+자신의 모임 이름, 모임 날짜 데이터가 담긴 모임 리스트 받아오는 api
+[GET] http://127.0.0.1:8000/Plan/
+Response data: {id(Integer) name(CharField), confirmed_data(JSONField)}
+
+* page 4-1 : 
+새로운 Plan 생성 api (author, url은 자동으로 같이 생성됨)
+[POST] http://127.0.0.1:8000/Plan/
+Request Data: name(CharField), confirmed_date(JSONField)
+
+* page 4-2 : 
+id=pk인 Plan의 Link를 받아오는 api
+[GET] http://127.0.0.1:8000/Plan/<pk>/getLink
+Response data: invite_url(URLField)
+
+* page 5 : 
+id=pk인 Plan의 DummyPlan을 생성하는 api
+[POST] http://127.0.0.1:8000/Plan/<pk>/createDummyPlan
+Request data: name(CharField), date(JSONField)
+
+* page 6-0 ~ 6-2 : 
+id=pk인 Plan의 DummyPlan들을 받아오는 api
+[GET] http://127.0.0.1:8000/Plan/<pk>/getDummyPlans
+Response data: {id(Integer) name(CharField), date(JSONField)}
+
+id=pk인 DummyPlan을 삭제하는 api
+[DELETE] http://127.0.0.1:8000/DummyPlan/<pk>
+Response data:
+
+* page 6-3 : 
+id=pk인 Plan의 약속 날짜를 정하는 api
+[PATCH] http://127.0.0.1:8000/Plan/<pk>/confirmPlanDate
+Request data: confirmed_date(JSONField)
+
+* page 6-4 : 
+id=pk인 Plan의 약속 날짜를 받아오는 api
+[GET] http://127.0.0.1:8000/Plan/<pk>/confirmPlanDate
+Response data: name(CharField), confirmed_date(JSONField)

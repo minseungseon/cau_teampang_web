@@ -4,13 +4,6 @@
 ## About Teampang  
 Teampang is an assisstant web/app service for managing team projects. It is especially aimed at university students, who apparently come across a lot of group projects during semester.  
 
-## Build Status  
-| **Date** | **Contributor** | **Updated Contents** |
-|:----:|:-----------:|:----------------:|
-|2020-07-06|Minseung Seon|Updated README.md|
-|2020-07-06|Minseung Seon, Lim Geon, Seungah Kim|had first meeting, modified UX/UI outline|
-| | | | 
-
 ## Tech/Framework used  
 | **Part Division** | **Tech/Framework** |
 |:-------------:|:--------------:|
@@ -30,7 +23,7 @@ Teampang is an assisstant web/app service for managing team projects. It is espe
 |Jaeyong Kim|JaeYooong|rladltjq123@hanmail.net|
 |Sangje Jeong|sanggae4133|sanggae4133@naver.com|
 |Seungah Kim|seungahkim|safg0421@gmail.com|
-|Sumin Kim|sumin||
+|Sumin Kim|sumin|jamie1541@naver.com|
   
 ## License  
 Chungang University, TeamPang 2020
