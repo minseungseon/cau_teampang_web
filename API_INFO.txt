@@ -13,7 +13,7 @@ Request Data: username, password
 
 * User 추가 정보 입력 : 
 추가 정보를 입력 요청하는 api
-[POST] http://127.0.0.1:8000/auth/profile/<int:user_pk>/update/
+[PATCH] http://127.0.0.1:8000/auth/profile/<int:user_pk>/update/
 Request Data: nickname, email
 
 
