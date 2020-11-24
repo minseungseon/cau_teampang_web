@@ -27,7 +27,7 @@ page 번호는 TeampAng Lite.xd 파일에서 앱 화면 번호를 참고
 Response data: num(Integer)
 
 자신의 모임 이름, 모임 날짜 데이터가 담긴 모임 리스트 받아오는 api
-[GET] http://127.0.0.1:8000/Plan/
+[GET] http://127.0.0.1:8000/Plan/getPlans
 Response data: {id(Integer) name(CharField), confirmed_data(JSONField)}
 
 * page 4-1 : 
