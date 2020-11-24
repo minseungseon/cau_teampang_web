@@ -1,5 +1,5 @@
 # api/urls.py
-from django.urls import path, include
+from django.urls import path
 from .views import HelloAPI, RegistrationAPI, LoginAPI, UserAPI, ProfileUpdateAPI
 
 urlpatterns = [

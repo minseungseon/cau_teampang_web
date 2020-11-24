@@ -8,6 +8,6 @@ class IsAuthorDelete(permissions.BasePermission):
     def has_object_permission(self, request, views, obj):
         # DELETE 요청에 한해, 작성자에게만 허용
         if (request.method == 'DELETE'):
-            return obj.author == request.user
+            return obj.connected_plan.author == request.user
         # 조회 요청은 항상 True
         return True
