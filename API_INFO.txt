@@ -3,17 +3,17 @@
 account 앱
 * Resgister : 
 회원가입을 요청하는 api
-[POST] http://127.0.0.1:8000/auth/register/
+[POST] http://127.0.0.1:8000/api/auth/register/
 Request Data: username, password
 
 * Login : 
 로그인을 요청하는 api
-[POST] http://127.0.0.1:8000/auth/login/
+[POST] http://127.0.0.1:8000/api/auth/login/
 Request Data: username, password
 
 * User 추가 정보 입력 : 
 추가 정보를 입력 요청하는 api
-[PATCH] http://127.0.0.1:8000/auth/profile/<int:user_pk>/update/
+[PATCH] http://127.0.0.1:8000/api/auth/profile/<int:user_pk>/update/
 Request Data: nickname, email
 
 
