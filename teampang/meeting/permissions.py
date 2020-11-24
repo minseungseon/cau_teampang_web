@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-class IsAuthorDelete(permissions.BasePermission):
+class IsAuthorReadOnly(permissions.BasePermission):
     # 모든 요청에 대해 허가
     def has_permission(self, request, view):
         return True
