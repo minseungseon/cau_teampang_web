@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Plan, DummyPlan
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.http import HttpResponse
@@ -12,7 +12,7 @@ from .permissions import IsAuthorDelete
 class PlanViewSet(viewsets.ModelViewSet):
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthorDelete]
 
 #################### page 4 ####################
 
@@ -82,11 +82,13 @@ class PlanViewSet(viewsets.ModelViewSet):
         
     #PlanViewSet에서 구현할 수 있는 방법이 없을까.  
     # 아래 DummyPlanViewset에서 일단 구현을 해줬음.  
-    # @action(detail = True, methods = ["DELETE"]) 
-    # # 더미플랜 지우기
-    # def deleteDummyPlan(self, request, pk): 
-    #     pass
-
+    @action(detail = True, methods = ["PATCH"]) 
+    # 더미플랜 지우기
+    def deleteDummyPlan(self, request, pk): 
+        plan = self.get_object()
+        dummy_plan = plan.dummy_plans.get(pk=request.data)
+        dummy_plan.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 #################### page 6-3 ####################
     @action(detail = True, methods = ["PATCH"]) 
@@ -115,10 +117,4 @@ class PlanViewSet(viewsets.ModelViewSet):
 class DummyPlanViewSet(viewsets.ModelViewSet):
     queryset = DummyPlan.objects.all()
     serializer_class = DummyPlanSerializer
-    permission_classes = [IsAuthorDelete]
-
-    # override destroy
-    # def destroy(self, request, *args, **kwargs):
-    #     instance = self.get_object()
-    #     self.perform_destroy(instance)
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
+    # permission_classes = [IsAuthorDelete]
