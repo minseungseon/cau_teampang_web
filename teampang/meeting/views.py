@@ -7,12 +7,12 @@ from django.http import HttpResponse
 from .serializer import *
 import json
 
-from .permissions import IsAuthorDelete
+from .permissions import IsAuthorReadOnly
 
 class PlanViewSet(viewsets.ModelViewSet):
     queryset = Plan.objects.all()
     serializer_class = PlanSerializer
-    permission_classes = [IsAuthorDelete]
+    permission_classes = [IsAuthorReadOnly]
 
 #################### page 4 ####################
 
@@ -38,14 +38,18 @@ class PlanViewSet(viewsets.ModelViewSet):
 #################### page 4-1 ####################
 
     #plan 생성
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
     def perform_create(self, serializer):
-        print("perform_create:::")
-        print(self.request.user)
         plan = serializer.save(author=self.request.user) #author의 primary key로 연결
         plan.invite_url = "http://127.0.0.1:8000/Plan/"+ str(plan.id) +"/createDummyPlan/"
         plan.save()
         
-
 #################### page 4-2 ####################
 
     @action(detail = True, methods = ["GET"])
@@ -86,7 +90,8 @@ class PlanViewSet(viewsets.ModelViewSet):
     # 더미플랜 지우기
     def deleteDummyPlan(self, request, pk): 
         plan = self.get_object()
-        dummy_plan = plan.dummy_plans.get(pk=request.data)
+        #request.data는 front에서 삭제할 dummyPlan의 pk 주어야함
+        dummy_plan = plan.dummy_plans.get(pk=request.data) 
         dummy_plan.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
