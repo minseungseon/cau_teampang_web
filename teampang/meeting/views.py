@@ -111,10 +111,3 @@ class PlanViewSet(viewsets.ModelViewSet):
         plan = self.get_object()
         serializer = PlanSerializer(plan, fields=('name', 'confirmed_date')) #dynamic serializer fields
         return Response(serializer.data, status=200)
-
-#팀장만 지울 수 있도록 권한을 줘야함.
-#이걸 체크하는 함수 만들어야함.
-class DummyPlanViewSet(viewsets.ModelViewSet):
-    queryset = DummyPlan.objects.all()
-    serializer_class = DummyPlanSerializer
-    # permission_classes = [IsAuthorDelete]
