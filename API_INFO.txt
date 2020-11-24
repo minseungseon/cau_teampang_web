@@ -33,7 +33,7 @@ Response data: {id(Integer) name(CharField), confirmed_data(JSONField)}
 * page 4-1 : 
 새로운 Plan 생성 api (author, url은 자동으로 같이 생성됨)
 [POST] http://127.0.0.1:8000/Plan/
-Request Data: name(CharField)
+Request Data: name(CharField), date_range(JSONField)
 
 * page 4-2 : 
 id=pk인 Plan의 Link를 받아오는 api
