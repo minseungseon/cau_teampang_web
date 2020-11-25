@@ -5,8 +5,10 @@ from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from knox.models import AuthToken
 from .serializers import CreateUserSerializer, UserSerializer, LoginUserSerializer
-from .models import Profile
 from .serializers import ProfileSerializer
+
+from .models import Profile
+from django.contrib.auth.models import User
 
 # Create your views here.
 @api_view(["GET"])
@@ -32,6 +34,19 @@ class RegistrationAPI(generics.GenericAPIView):
                 "token": AuthToken.objects.create(user)[1],
             }
         )
+
+# username(id) 중복체크
+@api_view()
+def checkId(request):
+    try:
+        user = User.objects.get(username=request.data.get('username'))
+    except Exception as e:
+        user = None
+    result = {
+        'result':'success',
+        'data': "not exist" if user is None else "exist"
+    }
+    return Response(result)
 
 
 class LoginAPI(generics.GenericAPIView):
