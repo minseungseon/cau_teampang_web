@@ -6,6 +6,11 @@ account 앱
 [POST] http://127.0.0.1:8000/api/auth/register/
 Request Data: username, password
 
+* Check ID:
+회원가입할 때 ID 중복체크하는 api
+[GET] http://127.0.0.1:8000/api/auth/checkId/
+Request Data: username
+
 * Login : 
 로그인을 요청하는 api
 [POST] http://127.0.0.1:8000/api/auth/login/
