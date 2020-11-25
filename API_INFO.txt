@@ -50,9 +50,9 @@ id=pk인 Plan의 DummyPlan들을 받아오는 api
 [GET] http://127.0.0.1:8000/Plan/<pk>/getDummyPlans
 Response data: {id(Integer) name(CharField), date(JSONField)}
 
-id=pk인 DummyPlan을 삭제하는 api
-[DELETE] http://127.0.0.1:8000/DummyPlan/<pk>
-Response data:
+id=pk인 Plan의 요청값 id= pk2인 DummyPlan을 삭제하는 api
+[PATCH] http://127.0.0.1:8000/Plan/<pk>/deleteDummyPlan
+Request data: pk2(Integer)
 
 * page 6-3 : 
 id=pk인 Plan의 약속 날짜를 정하는 api
